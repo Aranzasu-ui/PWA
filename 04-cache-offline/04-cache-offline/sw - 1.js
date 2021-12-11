@@ -1,0 +1,27 @@
+
+self.addEventListener('fetch', event => {
+
+    const offlineResp = new Response(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mi PWA</title>
+    </head>
+    <body class="container p-3">
+        
+        <h1>Modo Offline</h1>
+
+    </body>
+    </html>
+    `, { 
+        headers: {
+            'Content-Type':'text/html'
+        }
+    });
+
+    const resp = fetch(event.request)
+                .catch( () => offlineResp );
+
+    event.respondWith( resp );
+});
